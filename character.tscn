@@ -1,0 +1,85 @@
+[gd_scene load_steps=8 format=3 uid="uid://c6hakar0153r2"]
+
+[ext_resource type="Script" path="res://character.gd" id="1_dx1hx"]
+[ext_resource type="Texture2D" uid="uid://xd5endvr5skj" path="res://art/character.png" id="2_la57h"]
+[ext_resource type="Texture2D" uid="uid://cujea66if2r1n" path="res://art/atsweapon.png" id="3_ljfxq"]
+[ext_resource type="PackedScene" uid="uid://b74ejle6wgai7" path="res://knife.tscn" id="5_8x247"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cjglj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_ljfxq")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_765e8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_la57h")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y7tay"]
+size = Vector2(173, 286)
+
+[node name="Character" type="CharacterBody2D"]
+position = Vector2(535, 319)
+scale = Vector2(0.5, 0.5)
+collision_mask = 0
+motion_mode = 1
+script = ExtResource("1_dx1hx")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(1, 1)
+zoom = Vector2(0.5, 0.5)
+
+[node name="Gun" type="CharacterBody2D" parent="."]
+position = Vector2(-4, -2)
+
+[node name="ShotTimer" type="Timer" parent="Gun"]
+wait_time = 0.113
+
+[node name="Muzzle" type="Marker2D" parent="Gun"]
+position = Vector2(44, 8)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Gun"]
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_cjglj")
+offset = Vector2(0, -24)
+
+[node name="DashTimer" type="Timer" parent="."]
+wait_time = 0.366
+
+[node name="DashCooldown" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[node name="Hands" type="Marker2D" parent="."]
+position = Vector2(2, 48)
+
+[node name="Knife" parent="." instance=ExtResource("5_8x247")]
+position = Vector2(2, -8)
+collision_layer = 8
+collision_mask = 0
+script = null
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-3, -2)
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_765e8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, -9)
+scale = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_y7tay")
+
+[connection signal="timeout" from="Gun/ShotTimer" to="." method="_on_shot_timer_timeout"]
+[connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]

@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://b74ejle6wgai7"]
+
+[ext_resource type="Texture2D" uid="uid://d3832oj8v60xj" path="res://art/knife.png" id="1_sb1by"]
+
+[sub_resource type="GDScript" id="GDScript_7q0em"]
+script/source = "extends Area2D
+
+
+	
+
+"
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6yw13"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_sb1by")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_trpc5"]
+size = Vector2(43, 244)
+
+[node name="Knife" type="Area2D"]
+collision_layer = 4
+collision_mask = 2
+script = SubResource("GDScript_7q0em")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -117)
+sprite_frames = SubResource("SpriteFrames_6yw13")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, -117)
+shape = SubResource("RectangleShape2D_trpc5")

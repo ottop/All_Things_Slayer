@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://cjmccr0dpgl0v"]
+
+[node name="DirectionIndicator" type="CanvasLayer"]
+
+[node name="Label" type="Label" parent="."]
+offset_left = 402.0
+offset_top = 35.0
+offset_right = 442.0
+offset_bottom = 61.0
+text = "1"

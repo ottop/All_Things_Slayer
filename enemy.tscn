@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://cjde6sb15qs55"]
+
+[ext_resource type="Script" path="res://enemy.gd" id="1_7inaf"]
+[ext_resource type="Texture2D" uid="uid://ueg6kajfhuvb" path="res://art/enemy.png" id="2_mcejo"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2a1ey"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_mcejo")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vty63"]
+size = Vector2(134, 84)
+
+[node name="enemy" type="CharacterBody2D" groups=["enemies"]]
+position = Vector2(15, 31)
+scale = Vector2(0.5, 0.5)
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_7inaf")
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(2, 6)
+sprite_frames = SubResource("SpriteFrames_2a1ey")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 4)
+shape = SubResource("RectangleShape2D_vty63")
+
+[node name="Cooldown" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
