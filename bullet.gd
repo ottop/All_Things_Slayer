@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 var speed = 850
-var bullet_dmg = 20
+var bullet_dmg = 30
 
 func start(_position, _direction):
 	rotation = _direction

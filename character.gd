@@ -4,9 +4,9 @@ signal turn
 
 var Bullet = preload("res://bullet.tscn")
 
-var speed = 700
+var speed = 300
 var dash_multiplier = 4
-var knife_dmg = 50
+var knife_dmg = 100
 var health = 100
 var input_dir
 
@@ -35,7 +35,7 @@ func get_input():
 			$DashCooldown.start()
 		
 	if $DashTimer.is_stopped() == false:
-		
+		set_collision_layer_value(1,false)
 		$Knife.rotation = velocity.angle()
 		if turned:
 			$Knife.rotation += PI
@@ -48,20 +48,21 @@ func get_input():
 		velocity = velocity * dash_multiplier
 		
 	if $DashTimer.is_stopped() == true:
+		set_collision_layer_value(1,true)
 		$Knife.hide()
 		$Knife.set_collision_mask_value(2,false)
 		get_tree().call_group("enemies", "hitbox_restore")
 		
-	if Input.is_action_pressed("click"):
-		var dir = get_global_mouse_position() - global_position
-		"""if (dir.angle() > 0.5 * PI):
-			$AnimatedSprite2D.animation = "default"
-		else:
-			$AnimatedSprite2D.animation = "new_animation"""
-		$Gun.rotation = dir.angle()
-		if ($Gun/ShotTimer.is_stopped()):
-			shoot()
-			$Gun/ShotTimer.start()
+		if Input.is_action_pressed("click"):
+			var dir = get_global_mouse_position() - global_position
+			"""if (dir.angle() > 0.5 * PI):
+				$AnimatedSprite2D.animation = "default"
+			else:
+				$AnimatedSprite2D.animation = "new_animation"""
+			$Gun.rotation = dir.angle()
+			if ($Gun/ShotTimer.is_stopped()):
+				shoot()
+				$Gun/ShotTimer.start()
 			
 func shoot():
 	var b = Bullet.instantiate()
@@ -88,7 +89,7 @@ func _on_shot_timer_timeout():
 func _on_dash_timer_timeout():
 	$DashTimer.stop()
 
-func hit(dmg):
+func playerhit(dmg):
 	health -= dmg
 	if health <= 0:
 		queue_free()

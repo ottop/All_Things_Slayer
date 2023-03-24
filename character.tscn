@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://c6hakar0153r2"]
+[gd_scene load_steps=9 format=3 uid="uid://c6hakar0153r2"]
 
 [ext_resource type="Script" path="res://character.gd" id="1_dx1hx"]
 [ext_resource type="Texture2D" uid="uid://xd5endvr5skj" path="res://art/character.png" id="2_la57h"]
@@ -30,6 +30,12 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y7tay"]
 size = Vector2(173, 286)
 
+[sub_resource type="Curve2D" id="Curve2D_hwd0x"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -1071, -639, 0, 0, 0, 0, 1153, -639, 0, 0, 0, 0, 1153, 657, 0, 0, 0, 0, -1071, 657, 0, 0, 0, 0, -1071, -639)
+}
+point_count = 5
+
 [node name="Character" type="CharacterBody2D"]
 position = Vector2(535, 319)
 scale = Vector2(0.5, 0.5)
@@ -39,7 +45,6 @@ script = ExtResource("1_dx1hx")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(1, 1)
-zoom = Vector2(0.5, 0.5)
 
 [node name="Gun" type="CharacterBody2D" parent="."]
 position = Vector2(-4, -2)
@@ -59,7 +64,7 @@ offset = Vector2(0, -24)
 wait_time = 0.366
 
 [node name="DashCooldown" type="Timer" parent="."]
-wait_time = 5.0
+wait_time = 1.669
 one_shot = true
 
 [node name="Hands" type="Marker2D" parent="."]
@@ -80,6 +85,12 @@ sprite_frames = SubResource("SpriteFrames_765e8")
 position = Vector2(-0.5, -9)
 scale = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_y7tay")
+
+[node name="SpawnPath" type="Path2D" parent="."]
+curve = SubResource("Curve2D_hwd0x")
+
+[node name="SpawnLocation" type="PathFollow2D" parent="SpawnPath"]
+position = Vector2(-1071, -639)
 
 [connection signal="timeout" from="Gun/ShotTimer" to="." method="_on_shot_timer_timeout"]
 [connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]
