@@ -57,6 +57,10 @@ turn={
 ]
 }
 
+[physics]
+
+2d/run_on_separate_thread=true
+
 [rendering]
 
 renderer/rendering_method="mobile"

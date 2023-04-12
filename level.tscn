@@ -7,5 +7,4 @@
 tile_set = ExtResource("1_pupql")
 format = 2
 layer_0/name = "base"
-layer_0/tile_data = PackedInt32Array(0, 0, 0, 1, 65536, 0, 2, 131072, 0)
 script = ExtResource("2_jx0rq")

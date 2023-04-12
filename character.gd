@@ -92,4 +92,5 @@ func _on_dash_timer_timeout():
 func playerhit(dmg):
 	health -= dmg
 	if health <= 0:
-		queue_free()
+		hide()
+		set_physics_process(false)

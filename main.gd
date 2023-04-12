@@ -8,12 +8,14 @@ var tilelist = []
 
 func _physics_process(delta):
 	for enemy in enemylist:
-		if (enemy != null and $Character != null):
+		if (enemy != null):
 			var direction = $Character.get_global_position() - enemy.get_global_position() 
 			enemy.velocity = direction.normalized() * 350
 			enemy.move_and_slide()
-	
-	spawn_tile()
+	var playerpos = Vector2i($Character.position)
+	$Level.remove_cell($Level.local_to_map(playerpos))
+	$Level.make_grid($Level.local_to_map(playerpos) - Vector2i(24,13))
+	#spawn_tile()
 
 func make_enemy(pos):
 	var enemy = Enemy.instantiate()
@@ -54,14 +56,4 @@ func _on_spawn_timer_timeout():
 		make_enemy(pos)
 	$SpawnTimer.start()
 
-func spawn_tile():
-	if $Character != null:
-		var playerpos = $Character.position
-		var tm = $Level.get_pattern(0, [Vector2i(randi_range(0,2),0)])
-		tilelist = $Level.get_used_cells(0)
-		if !($Level.get_neighbor_cell(playerpos / 64, TileSet.CELL_NEIGHBOR_BOTTOM_RIGHT_SIDE) in tilelist):
-			$Level.set_pattern(0,playerpos / 64,tm)
-		
-		
-	
 

@@ -10,6 +10,7 @@
 script = ExtResource("1_abxj6")
 
 [node name="Level" parent="." instance=ExtResource("6_mr6p4")]
+position = Vector2(535, 319)
 
 [node name="Character" parent="." instance=ExtResource("2_k1osb")]
 
