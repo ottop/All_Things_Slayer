@@ -1,15 +1,15 @@
 [gd_scene load_steps=6 format=3 uid="uid://x7morythpvfq"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_abxj6"]
-[ext_resource type="PackedScene" uid="uid://b26d2laxkkofj" path="res://texture_rect.tscn" id="1_wb11s"]
 [ext_resource type="PackedScene" uid="uid://c6hakar0153r2" path="res://character.tscn" id="2_k1osb"]
 [ext_resource type="PackedScene" uid="uid://cjmccr0dpgl0v" path="res://direction_indicator.tscn" id="4_js8kc"]
 [ext_resource type="Script" path="res://direction_indicator.gd" id="5_h11cx"]
+[ext_resource type="PackedScene" uid="uid://dpwuof3tuuh2u" path="res://level.tscn" id="6_mr6p4"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_abxj6")
 
-[node name="TextureRect" parent="." instance=ExtResource("1_wb11s")]
+[node name="Level" parent="." instance=ExtResource("6_mr6p4")]
 
 [node name="Character" parent="." instance=ExtResource("2_k1osb")]
 

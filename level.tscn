@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://dpwuof3tuuh2u"]
+
+[ext_resource type="TileSet" uid="uid://dta76nwby3lgu" path="res://level.tres" id="1_pupql"]
+[ext_resource type="Script" path="res://level.gd" id="2_jx0rq"]
+
+[node name="Level" type="TileMap"]
+tile_set = ExtResource("1_pupql")
+format = 2
+layer_0/name = "base"
+layer_0/tile_data = PackedInt32Array(0, 0, 0, 1, 65536, 0, 2, 131072, 0)
+script = ExtResource("2_jx0rq")

@@ -18,9 +18,10 @@ func hitbox_restore():
 func _physics_process(delta):
 	if (get_last_slide_collision() != null):
 			if ($Cooldown.is_stopped()):
-				if (get_last_slide_collision().get_collider().has_method("playerhit")):
-					get_last_slide_collision().get_collider().playerhit(dmg)
-					$Cooldown.start()
+				if get_last_slide_collision().get_collider() != null:
+					if (get_last_slide_collision().get_collider().has_method("playerhit")):
+						get_last_slide_collision().get_collider().playerhit(dmg)
+						$Cooldown.start()
 	
 func _on_cooldown_timeout():
 	$Cooldown.stop()
